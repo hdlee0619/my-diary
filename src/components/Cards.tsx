@@ -1,13 +1,18 @@
 import React from 'react';
 
-const Cards = () => {
+// 일단 any로 처리
+interface CardsProps {
+  item: any;
+}
+
+const Cards: React.FC<CardsProps> = ({ item }) => {
   return (
     <div className="card">
-      <h1>Title</h1>
+      <h1>{item.title}</h1>
       <div>
-        <span>date</span>
-        <span>weather</span>
-        <span>author</span>
+        <span>{item.date}</span>
+        <span>{item.weather}</span>
+        <span>{item.author}</span>
       </div>
       <div>
         <button>수정</button>
