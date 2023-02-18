@@ -6,7 +6,7 @@
       "date": "2023.2.17 Fri",
       "author": "hdlee0169",
       "contents": "이러쿵 저러쿵",
-      "weather": "날씨 이모티콘"
+      "weather": "맑음"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "date": "2023.2.16 Sat",
       "author": "hdlee0169",
       "contents": "이러쿵 저러쿵",
-      "weather": "날씨 이모티콘"
+      "weather": "흐림"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "date": "2023.2.17 Sun",
       "author": "hdlee0169",
       "contents": "이러쿵 저러쿵",
-      "weather": "날씨 이모티콘"
+      "weather": "눈"
     }
   ]
 }

@@ -1,5 +1,8 @@
-const configStore = () => {
-  return;
-};
+import { configureStore } from '@reduxjs/toolkit';
+import post from '../modules/post';
 
-export default configStore;
+const store = configureStore({
+  reducer: { post },
+});
+
+export default store;
