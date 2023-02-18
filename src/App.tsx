@@ -1,4 +1,3 @@
-import './App.scss';
 import Router from './shared/Router';
 
 function App(): JSX.Element {
