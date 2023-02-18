@@ -1,8 +1,8 @@
-import React from 'react';
 import './App.scss';
+import Router from './shared/Router';
 
-function App() {
-  return <div></div>;
+function App(): JSX.Element {
+  return <Router></Router>;
 }
 
 export default App;
