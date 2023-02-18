@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 100vh;
+  margin: 0.625rem;
+  border: 1px solid black;
+
+  & h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  & button {
+    margin: 0.5rem;
+  }
+}
