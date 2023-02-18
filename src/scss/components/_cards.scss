@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 0.625rem;
+  padding: 0.625rem;
+  border: 0.0625rem solid black;
+  h1 {
+    margin: 0.625rem;
+  }
+  span {
+    margin: 0 0.1875rem 0 0.1875rem;
+  }
+}
