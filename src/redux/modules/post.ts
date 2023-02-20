@@ -53,6 +53,16 @@ export const __writePost = createAsyncThunk('writepost', async (payload: any, th
   }
 });
 
+export const __editPost = createAsyncThunk('editpost', async (payload: any, thunkAPI) => {
+  try {
+    await axios.patch(`http://localhost:4000/post/${payload.id}`, payload);
+    const data = await axios.get('http://localhost:4000/post');
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -71,7 +81,9 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.error = true;
         state.error = action.payload;
-      })
+      });
+
+    builder
       .addCase(__deletePost.fulfilled, (state, action: any) => {
         state.isLoading = false;
         state.post = action.payload;
@@ -79,10 +91,15 @@ const postSlice = createSlice({
       .addCase(__deletePost.rejected, (state, action: any) => {
         state.error = true;
         state.error = action.payload;
-      })
-      .addCase(__writePost.fulfilled, (state, action) => {
-        state.post = action.payload;
       });
+
+    builder.addCase(__writePost.fulfilled, (state, action) => {
+      state.post = action.payload;
+    });
+
+    builder.addCase(__editPost.fulfilled, (state, action) => {
+      state.post = action.payload;
+    });
   },
 });
 
