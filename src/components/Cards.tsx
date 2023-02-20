@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __deletePost } from '../redux/modules/post';
+import ModalDetail from './modal/ModalDetail';
 import ModalEditPost from './modal/ModalEditPost';
 
 // 일단 any로 처리
@@ -14,10 +15,9 @@ const Cards: React.FC<CardsProps> = ({ item }) => {
     dispatch(__deletePost(id));
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const openModalHandler = () => {
-    setIsOpen(true);
-  };
+  const [isOpenEditPost, setIsOpenEditPost] = useState(false);
+
+  const [isOpenDetail, setIsOpenDetail] = useState(false);
 
   return (
     <>
@@ -29,11 +29,13 @@ const Cards: React.FC<CardsProps> = ({ item }) => {
           <span>{item.author}</span>
         </div>
         <div>
-          <button onClick={openModalHandler}>수정</button>
+          <button onClick={() => setIsOpenDetail(true)}>상세보기</button>
+          <button onClick={() => setIsOpenEditPost}>수정</button>
           <button onClick={() => deleteBtnHandler(item.id)}>삭제</button>
         </div>
       </div>
-      {isOpen && <ModalEditPost onClose={() => setIsOpen(false)} item={item}></ModalEditPost>}
+      {isOpenEditPost && <ModalEditPost onClose={() => setIsOpenEditPost(false)} item={item}></ModalEditPost>}
+      {isOpenDetail && <ModalDetail onClose={() => setIsOpenDetail(false)} item={item}></ModalDetail>}
     </>
   );
 };
