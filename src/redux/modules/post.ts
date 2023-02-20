@@ -24,19 +24,15 @@ const initialState: PostState = {
 export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
   try {
     const data = await axios.get('http://localhost:4000/post');
-    console.log('__getPost thunk API data.data', data.data);
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
 });
 
-export const __deletePost = createAsyncThunk<number, number>('deletpost', async (payload, thunkAPI) => {
+export const __deletePost = createAsyncThunk('deletpost', async (payload: any, thunkAPI) => {
   try {
     await axios.delete(`http://localhost:4000/post/${payload}`);
-    const data = await axios.get('http://localhost:4000/post');
-    console.log('thunk API', thunkAPI.fulfillWithValue(data));
-    return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -45,7 +41,6 @@ export const __deletePost = createAsyncThunk<number, number>('deletpost', async 
 export const __writePost = createAsyncThunk('writepost', async (payload: any, thunkAPI: any) => {
   try {
     await axios.post('http://localhost:4000/post', payload);
-    console.log(payload);
     const data = await axios.get('http://localhost:4000/post');
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
@@ -56,8 +51,6 @@ export const __writePost = createAsyncThunk('writepost', async (payload: any, th
 export const __editPost = createAsyncThunk('editpost', async (payload: any, thunkAPI) => {
   try {
     await axios.patch(`http://localhost:4000/post/${payload.id}`, payload);
-    const data = await axios.get('http://localhost:4000/post');
-    return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -74,7 +67,6 @@ const postSlice = createSlice({
       }) //일단 any로 처리
       .addCase(__getPost.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log('__getPost fulfilled : ', action.payload);
         state.post = action.payload;
       }) // 일단 any로 처리
       .addCase(__getPost.rejected, (state: any, action) => {
@@ -84,9 +76,11 @@ const postSlice = createSlice({
       });
 
     builder
-      .addCase(__deletePost.fulfilled, (state, action: any) => {
+      .addCase(__deletePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__deletePost.fulfilled, (state: any) => {
         state.isLoading = false;
-        state.post = action.payload;
       })
       .addCase(__deletePost.rejected, (state, action: any) => {
         state.error = true;
@@ -94,11 +88,11 @@ const postSlice = createSlice({
       });
 
     builder.addCase(__writePost.fulfilled, (state, action) => {
-      state.post = action.payload;
+      state.isLoading = false;
     });
 
-    builder.addCase(__editPost.fulfilled, (state, action) => {
-      state.post = action.payload;
+    builder.addCase(__editPost.fulfilled, (state) => {
+      state.isLoading = false;
     });
   },
 });

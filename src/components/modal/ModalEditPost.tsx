@@ -3,7 +3,7 @@ import ModalPortal from './ModalPotal';
 import ModalWrap from './ModalWrap';
 import useInput from '../../hooks/useInput';
 import { useDispatch } from 'react-redux';
-import { __editPost } from '../../redux/modules/post';
+import { __editPost, __getPost } from '../../redux/modules/post';
 
 interface ModalPropsType {
   item: any;
@@ -31,9 +31,10 @@ const ModalEditPost: React.FC<ModalPropsType> = ({ item, onClose }) => {
     contents: item.contents,
   });
   // 우선 any로 처리
-  const editSubmitHandler = (e: any) => {
+  const editSubmitHandler = async (e: any) => {
     e.preventDefault();
-    dispatch(__editPost({ id, title, date, weather, contents }) as any);
+    await dispatch(__editPost({ id, title, date, weather, contents }) as any);
+    dispatch(__getPost() as any);
     onClose();
   };
   return (

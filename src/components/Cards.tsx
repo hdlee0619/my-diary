@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { __deletePost } from '../redux/modules/post';
+import { __deletePost, __getPost } from '../redux/modules/post';
 import ModalDetail from './modal/ModalDetail';
 import ModalEditPost from './modal/ModalEditPost';
 
@@ -11,8 +11,10 @@ interface CardsProps {
 
 const Cards: React.FC<CardsProps> = ({ item }) => {
   const dispatch: any = useDispatch();
-  const deleteBtnHandler = (id: number) => {
-    dispatch(__deletePost(id));
+
+  const deleteBtnHandler = async (id: number) => {
+    await dispatch(__deletePost(id));
+    dispatch(__getPost());
   };
 
   const [isOpenEditPost, setIsOpenEditPost] = useState(false);

@@ -2,10 +2,10 @@
   "post": [
     {
       "id": 1,
-      "title": "힘든 하루:)",
+      "title": "힘든 하루 :)",
       "date": "2023.2.20 Sat",
       "author": "hdlee0169",
-      "contents": "이러쿵 저러쿵 저러쿵 이러쿵",
+      "contents": "이러쿵 저러쿵",
       "weather": "흐림"
     },
     {
@@ -18,11 +18,19 @@
     },
     {
       "id": 3,
-      "title": "일기 :(",
-      "date": "2023.2.17 Sun",
+      "title": "좋은 하루 :)",
+      "date": "2023.2.16 Sat",
       "author": "hdlee0169",
       "contents": "이러쿵 저러쿵",
-      "weather": "눈"
+      "weather": "흐림"
+    },
+    {
+      "id": 4,
+      "title": "좋은 하루 :)",
+      "date": "2023.2.16 Sat",
+      "author": "hdlee0169",
+      "contents": "이러쿵 저러쿵",
+      "weather": "흐림"
     }
   ]
 }

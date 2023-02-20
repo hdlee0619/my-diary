@@ -1,10 +1,12 @@
 import React from 'react';
 import useInput from '../hooks/useInput';
 import { useDispatch } from 'react-redux';
-import { __writePost } from '../redux/modules/post';
+import { __writePost, __getPost } from '../redux/modules/post';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
   const userID = 'hdlee0619'; // JWT 구현 전이라 일단 default로 userId 생성
+  const navigate = useNavigate();
 
   const [{ title, date, weather, author, contents }, setPostData] = useInput({
     title: '',
@@ -16,10 +18,14 @@ const Form = () => {
 
   // 우선 any로 처리
   const dispatch = useDispatch();
-  const submitPostHandler = (e: any) => {
+
+  const submitPostHandler = async (e: any) => {
     e.preventDefault();
-    dispatch(__writePost({ title, date, weather, contents, author }) as any);
+    await dispatch(__writePost({ title, date, weather, contents, author }) as any);
+    dispatch(__getPost() as any);
+    navigate('/');
   };
+
   return (
     <div>
       <form onSubmit={submitPostHandler}>
