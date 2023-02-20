@@ -30,7 +30,7 @@ const Cards: React.FC<CardsProps> = ({ item }) => {
         </div>
         <div>
           <button onClick={() => setIsOpenDetail(true)}>상세보기</button>
-          <button onClick={() => setIsOpenEditPost}>수정</button>
+          <button onClick={() => setIsOpenEditPost(true)}>수정</button>
           <button onClick={() => deleteBtnHandler(item.id)}>삭제</button>
         </div>
       </div>
