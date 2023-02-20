@@ -42,6 +42,17 @@ export const __deletePost = createAsyncThunk<number, number>('deletpost', async 
   }
 });
 
+export const __writePost = createAsyncThunk('writepost', async (payload: any, thunkAPI: any) => {
+  try {
+    await axios.post('http://localhost:4000/post', payload);
+    console.log(payload);
+    const data = await axios.get('http://localhost:4000/post');
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -63,6 +74,13 @@ const postSlice = createSlice({
       })
       .addCase(__deletePost.fulfilled, (state, action: any) => {
         state.isLoading = false;
+        state.post = action.payload;
+      })
+      .addCase(__deletePost.rejected, (state, action: any) => {
+        state.error = true;
+        state.error = action.payload;
+      })
+      .addCase(__writePost.fulfilled, (state, action) => {
         state.post = action.payload;
       });
   },
