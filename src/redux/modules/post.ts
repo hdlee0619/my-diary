@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const __readPost = createAsyncThunk;
-
 interface PostState {
   post: PostType[] | null;
   isLoading: boolean;
@@ -23,10 +21,24 @@ const initialState: PostState = {
   error: null,
 };
 
-export const __getPost = createAsyncThunk('post', async (payload, thunkAPI) => {
+export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
   try {
     const data = await axios.get('http://localhost:4000/post');
-    console.log(data.data);
+    console.log('__getPost thunk API data.data', data.data);
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+export const __deletePost = createAsyncThunk<number, number>('deletpost', async (payload, thunkAPI) => {
+  try {
+    await axios.delete(`http://localhost:4000/post/${payload}`);
+
+    const data = await axios.get('http://localhost:4000/post');
+
+    console.log('thunk API', thunkAPI.fulfillWithValue(data));
+
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -44,12 +56,17 @@ const postSlice = createSlice({
       }) //일단 any로 처리
       .addCase(__getPost.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log('__getPost fulfilled : ', action.payload);
         state.post = action.payload;
       }) // 일단 any로 처리
       .addCase(__getPost.rejected, (state: any, action) => {
         state.isLoading = false;
         state.error = true;
         state.error = action.payload;
+      })
+      .addCase(__deletePost.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.post = action.payload;
       });
   },
 });

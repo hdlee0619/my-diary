@@ -2,11 +2,11 @@
   "post": [
     {
       "id": 1,
-      "title": "오늘의 일기 :)",
-      "date": "2023.2.17 Fri",
+      "title": "힘든 하루 :(",
+      "date": "2023.2.20 Sat",
       "author": "hdlee0169",
       "contents": "이러쿵 저러쿵",
-      "weather": "맑음"
+      "weather": "흐림"
     },
     {
       "id": 2,
