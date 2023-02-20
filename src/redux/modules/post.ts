@@ -34,11 +34,8 @@ export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
 export const __deletePost = createAsyncThunk<number, number>('deletpost', async (payload, thunkAPI) => {
   try {
     await axios.delete(`http://localhost:4000/post/${payload}`);
-
     const data = await axios.get('http://localhost:4000/post');
-
     console.log('thunk API', thunkAPI.fulfillWithValue(data));
-
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
