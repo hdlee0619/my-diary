@@ -24,7 +24,7 @@ const Login = () => {
 
   const logInUser = async (id: string, passowrd: string) => {
     await axios
-      .post('http://3.38.191.164/login', { id, password })
+      .post(`${process.env.REACT_APP_LOG_IN_URL}/login`, { id, password })
       .then((response) => {
         setCookie('userToken', response.data.token);
         success = !success;
@@ -37,7 +37,7 @@ const Login = () => {
   const checkCookie = async (id: string, password: string) => {
     const token = cookies.userToken;
     await axios
-      .get('http://3.38.191.164/user', {
+      .get(`${process.env.REACT_APP_LOG_IN_URL}/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

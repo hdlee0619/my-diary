@@ -34,7 +34,7 @@ const ModalSignUp: React.FC<ModalSignUpType> = ({ onClose }) => {
   };
 
   const signUpUserInfo = async (id: string, password: string) => {
-    const response = await axios.post('http://3.38.191.164/register', { id: String(userId), password: String(userPassword) });
+    const response = await axios.post(`${process.env.REACT_APP_LOG_IN_URL}/register`, { id: String(userId), password: String(userPassword) });
     console.log(response.status);
     if (response.status === 201) {
       onClose();

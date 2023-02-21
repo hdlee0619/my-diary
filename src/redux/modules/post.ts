@@ -25,7 +25,7 @@ const initialState: PostState = {
 
 export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
   try {
-    const data = await axios.get('http://localhost:4000/post');
+    const data = await axios.get(`${process.env.REACT_APP_JSON_SERVER_URL}/post`);
     return thunkAPI.fulfillWithValue(data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -34,7 +34,7 @@ export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
 
 export const __deletePost = createAsyncThunk('deletpost', async (payload: any, thunkAPI) => {
   try {
-    const data = await axios.delete(`http://localhost:4000/post/${payload}`);
+    const data = await axios.delete(`${process.env.REACT_APP_JSON_SERVER_URL}/post/${payload}`);
     return thunkAPI.fulfillWithValue(data.status);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -43,7 +43,7 @@ export const __deletePost = createAsyncThunk('deletpost', async (payload: any, t
 
 export const __writePost = createAsyncThunk('writepost', async (payload: any, thunkAPI: any) => {
   try {
-    await axios.post('http://localhost:4000/post', payload);
+    await axios.post(`${process.env.REACT_APP_JSON_SERVER_URL}/post`, payload);
     const data = await axios.get('http://localhost:4000/post');
     return thunkAPI.fulfillWithValue(data.status);
   } catch (error) {
@@ -53,7 +53,7 @@ export const __writePost = createAsyncThunk('writepost', async (payload: any, th
 
 export const __editPost = createAsyncThunk('editpost', async (payload: any, thunkAPI) => {
   try {
-    await axios.patch(`http://localhost:4000/post/${payload.id}`, payload);
+    await axios.patch(`${process.env.REACT_APP_JSON_SERVER_URL}/post/${payload.id}`, payload);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }

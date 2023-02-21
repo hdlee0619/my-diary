@@ -7,9 +7,9 @@ const Router = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="login/" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="write/" element={<About />} />
-        <Route path="login/" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
