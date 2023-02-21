@@ -5,6 +5,7 @@ interface PostState {
   post: PostType[] | null;
   isLoading: boolean;
   error: string | boolean | null;
+  sucsess: null | number;
 }
 interface PostType {
   id: number;
@@ -19,6 +20,7 @@ const initialState: PostState = {
   post: [],
   isLoading: false,
   error: null,
+  sucsess: null,
 };
 
 export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
@@ -32,7 +34,8 @@ export const __getPost = createAsyncThunk('post', async (_, thunkAPI) => {
 
 export const __deletePost = createAsyncThunk('deletpost', async (payload: any, thunkAPI) => {
   try {
-    await axios.delete(`http://localhost:4000/post/${payload}`);
+    const data = await axios.delete(`http://localhost:4000/post/${payload}`);
+    return thunkAPI.fulfillWithValue(data.status);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -42,7 +45,7 @@ export const __writePost = createAsyncThunk('writepost', async (payload: any, th
   try {
     await axios.post('http://localhost:4000/post', payload);
     const data = await axios.get('http://localhost:4000/post');
-    return thunkAPI.fulfillWithValue(data.data);
+    return thunkAPI.fulfillWithValue(data.status);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -79,8 +82,9 @@ const postSlice = createSlice({
       .addCase(__deletePost.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(__deletePost.fulfilled, (state: any) => {
+      .addCase(__deletePost.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
+        state.sucsess = action.payload;
       })
       .addCase(__deletePost.rejected, (state, action: any) => {
         state.error = true;
