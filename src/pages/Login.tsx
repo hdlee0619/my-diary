@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import ModalSignUp from '../components/modal/ModalSignUp';
 import useInput from '../hooks/useInput';
@@ -12,14 +12,20 @@ const Login = () => {
   const navigate = useNavigate();
   let success = false;
 
+  const token = cookies.userToken;
+  useEffect(() => {
+    checkToken(token);
+  }, [cookies.userToken]);
+
   const signInHandler = async (e: any) => {
     e.preventDefault();
     logInUser(id, password);
+    success = !success;
     resetInputValue();
     if (success) {
-      checkCookie(id, password);
+      checkToken(token);
+      return (success = !success);
     }
-    navigate('/');
   };
 
   const logInUser = async (id: string, passowrd: string) => {
@@ -27,15 +33,13 @@ const Login = () => {
       .post(`${process.env.REACT_APP_LOG_IN_URL}/login`, { id, password })
       .then((response) => {
         setCookie('userToken', response.data.token);
-        success = !success;
       })
       .catch(() => {
-        alert('에러');
+        alert('login 에러');
       });
   };
 
-  const checkCookie = async (id: string, password: string) => {
-    const token = cookies.userToken;
+  const checkToken = async (token: string) => {
     await axios
       .get(`${process.env.REACT_APP_LOG_IN_URL}/user`, {
         headers: {
@@ -48,7 +52,6 @@ const Login = () => {
       })
       .catch(() => {
         removeCookie('userToken');
-        alert('checkCookie error');
       });
   };
 
