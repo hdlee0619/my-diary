@@ -6,10 +6,12 @@ interface btnType {
   onClick: () => void;
 }
 
-const Btn = ({ children, onClick }: btnType) => {
+const Btn = ({ className, children, onClick }: btnType) => {
   return (
     <>
-      <button onClick={onClick}>{children}</button>
+      <button className={className} onClick={onClick}>
+        {children}
+      </button>
     </>
   );
 };

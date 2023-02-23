@@ -1,8 +1,10 @@
 @use '../btn' as btn;
+@use '../../helper' as color;
 
 .layout {
   width: 80vw;
   height: 100vh;
-  border: 1px solid black;
   margin: 0.625rem;
+  border-radius: 0.625rem;
+  background-color: color.$layout-bg-color;
 }

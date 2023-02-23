@@ -1,13 +1,39 @@
+@use '../helper' as color;
+@use 'btn' as btn;
+
 .card {
   display: flex;
   flex-direction: column;
   margin: 0.625rem;
   padding: 0.625rem;
-  border: 0.0625rem solid black;
-  h1 {
-    margin: 0.625rem;
+  border-radius: 1.0625rem;
+  background-color: color.$card-bg-color;
+  color: color.$card-text-color;
+  font-weight: bold;
+
+  & h1 {
+    margin: 0.625rem 0 0.625rem 0;
   }
-  span {
-    margin: 0 0.1875rem 0 0.1875rem;
+  & span {
+    margin: 0 0.1875rem 0 0.1875rem 0;
+  }
+
+  button {
+    @include btn.layout-btn;
+
+    &.detail {
+      background-color: color.$btn-bg-detail-color;
+      color: color.$btn-text-detail-color;
+    }
+
+    &.edit {
+      background-color: color.$btn-bg-edit-color;
+      color: color.$btn-text-edit-color;
+    }
+
+    &.delete {
+      background-color: color.$btn-bg-close-color;
+      color: color.$btn-text-close-color;
+    }
   }
 }
