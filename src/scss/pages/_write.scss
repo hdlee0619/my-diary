@@ -1,0 +1,22 @@
+@use '../components/modal' as input-box;
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.write-box {
+  @extend .modal;
+  height: 600px;
+  & .info-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  & .contents-box {
+    display: flex;
+    flex-direction: column;
+  }
+}

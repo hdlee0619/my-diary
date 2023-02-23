@@ -1,0 +1,12 @@
+@use '../helper' as color;
+@use '../components/modal/index';
+
+.login-container {
+  height: 100vh;
+  & .login-wrapper {
+    margin-top: 100px;
+  }
+  & .form-wrapper {
+    @extend .modal;
+  }
+}

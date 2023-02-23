@@ -3,6 +3,7 @@ import ModalPortal from './ModalPotal';
 import ModalWrap from './ModalWrap';
 import axios from 'axios';
 import useInput from '../../hooks/useInput';
+import Btn from '../Btn';
 
 interface ModalSignUpType {
   onClose: any;
@@ -23,12 +24,16 @@ const ModalSignUp: React.FC<ModalSignUpType> = ({ onClose }) => {
 
   const checkSignUpInfo = (userId: string, userPassword: string, passwordCheck: string) => {
     const regId = /^[a-z]+[a-z0-9]{5,19}$/g;
+    const regPassword = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
     if (userPassword !== passwordCheck) {
       return alert('password가 일치하지 않습니다.');
     } else if (userId.trim().length < 5) {
-      return alert('id는 6글자 이상 입력');
+      return alert('id는 영문 소문자, 숫자 5자리 이상');
     } else if (!regId.test(userId)) {
-      return alert('id는 영문자 또는 숫자 6~20');
+      return alert('id는 영문 소문자, 숫자 5자리 이상');
+    } else if (!regPassword.test(userPassword)) {
+      return alert('password는 영어, 숫자, 특수문자 포함 8-15자리');
     }
     return (checkSuccess = true);
   };
@@ -46,18 +51,27 @@ const ModalSignUp: React.FC<ModalSignUpType> = ({ onClose }) => {
     <>
       <ModalPortal>
         <ModalWrap>
-          <div className="modal">
+          <div className="signup-modal">
             <form onSubmit={submitFormHandler}>
-              <h1>회원가입 창</h1>
-              id:
-              <input value={userId} onChange={inputHandler} name="userId" />
-              password:
-              <input value={userPassword} onChange={inputHandler} name="userPassword" />
-              password check:
-              <input value={passwordCheck} onChange={inputHandler} name="passwordCheck" />
-              <button>회원 가입</button>
+              <h2>회원가입 창</h2>
+
+              <div className="info-box">
+                <span>id :</span>
+                <input value={userId} onChange={inputHandler} name="userId" />
+                <span>영어 소문자, 숫자 5자리 이상</span>
+                <span>password :</span>
+                <input value={userPassword} onChange={inputHandler} name="userPassword" />
+                <span>영어, 숫자, 특수문자 포함 8-15자리</span>
+                <span>password check : </span>
+                <input value={passwordCheck} onChange={inputHandler} name="passwordCheck" />
+              </div>
+              <div className="btn-wrapper">
+                <Btn className="modal-submit-btn">회원 가입</Btn>
+                <Btn className="modal-close-btn" onClick={onClose}>
+                  닫기
+                </Btn>
+              </div>
             </form>
-            <button onClick={onClose}>닫기</button>
           </div>
         </ModalWrap>
       </ModalPortal>

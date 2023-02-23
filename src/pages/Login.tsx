@@ -58,17 +58,21 @@ const Login = () => {
 
   return (
     <>
-      <div>
-        <form onSubmit={signInHandler}>
-          id: <input value={id} onChange={inputHandler} name="id" />
-          password: <input value={password} onChange={inputHandler} name="password" />
-          <button>로그인 하기</button>
+      <div className="login-container">
+        <form className="form-wrapper" onSubmit={signInHandler}>
+          <div className="modal">
+            id: <input value={id} onChange={inputHandler} name="id" />
+            password: <input value={password} onChange={inputHandler} name="password" />
+            <div className="btn-wrapper">
+              <Btn className="modal-submit-btn">로그인 하기</Btn>
+              <Btn className="signup-btn" onClick={() => setOpenSignUpModal(true)}>
+                회원 가입 하기
+              </Btn>
+            </div>
+          </div>
         </form>
+        <div>{openSignUpModal && <ModalSignUp onClose={() => setOpenSignUpModal(false)}></ModalSignUp>}</div>
       </div>
-      <div>
-        <button onClick={() => setOpenSignUpModal(true)}>회원 가입 하기</button>
-      </div>
-      {openSignUpModal && <ModalSignUp onClose={() => setOpenSignUpModal(false)}></ModalSignUp>}
     </>
   );
 };
