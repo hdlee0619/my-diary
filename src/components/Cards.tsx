@@ -28,13 +28,13 @@ const Cards: React.FC<CardsProps> = ({ item }) => {
         <h2>{item.title}</h2>
         <div>
           <span>Date : </span>
-          <span>{item.date}</span>
+          &nbsp;<span>{item.date}</span>
           <br />
           <span>Weather : </span>
-          <span>{item.weather}</span>
+          &nbsp;<span>{item.weather}</span>
           <br />
           <span>ID : </span>
-          <span>{item.author}</span>
+          &nbsp;<span>{item.author}</span>
         </div>
         <div>
           <Btn className="detail" onClick={() => setIsOpenDetail(true)}>

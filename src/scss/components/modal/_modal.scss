@@ -1,11 +1,87 @@
+@use '../../helper/variable' as color;
+@use '../cards' as card;
+
 .modal {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 31.25rem;
   height: 31.25rem;
   padding: 1.25rem;
-  border: 1px solid black;
   border-radius: 1.25rem;
-  background-color: white;
+  background-color: color.$modal-bg-color;
+  font-weight: bold;
+  color: color.$card-text-color;
+
+  @include card.set-card-text() {
+    margin-left: 0.625rem;
+  }
+
+  & .info-box {
+    padding: 0.625rem;
+    border-radius: 10px;
+    background-color: color.$modal-text-box-bg-color;
+    & input {
+      padding: 0.5rem;
+      margin-right: 10px;
+    }
+  }
+
+  & .contents-box {
+    @extend .info-box;
+    border: 3px solid transparent;
+    height: 18.75rem;
+    margin: 12px 0;
+    & textarea {
+      resize: none;
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 0.625rem;
+      &:focus {
+        border: 3px solid #b1cad3;
+        outline: none;
+      }
+    }
+  }
+
+  & input {
+    border: 3px solid transparent;
+    border-radius: 0.5rem;
+    background-color: #f7f5eb;
+    box-sizing: border-box;
+    &.title {
+      margin-left: 10px;
+      margin-bottom: 0.625rem;
+      padding: 0.25rem 0.625rem 0.3125rem 1.125rem;
+      font-size: 1.5rem;
+    }
+    &:focus {
+      border: 3px solid #b1cad3;
+      outline: none;
+    }
+  }
+
+  & .btn-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  & button {
+    width: 8.75rem;
+    padding: 0.625rem;
+    border: none;
+    border-radius: 1.0625rem;
+    font-weight: bold;
+
+    &.modal-close-btn {
+      background-color: color.$btn-bg-close-color;
+      color: color.$btn-text-close-color;
+    }
+
+    &.modal-submit-btn {
+      background-color: color.$btn-bg-success-color;
+      color: color.$btn-text-success-color;
+    }
+  }
 }

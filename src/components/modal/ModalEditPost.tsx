@@ -4,6 +4,7 @@ import ModalWrap from './ModalWrap';
 import useInput from '../../hooks/useInput';
 import { useDispatch } from 'react-redux';
 import { __editPost, __getPost } from '../../redux/modules/post';
+import Btn from '../Btn';
 
 interface ModalPropsType {
   item: any;
@@ -35,7 +36,6 @@ const ModalEditPost: React.FC<ModalPropsType> = ({ item, onClose }) => {
     e.preventDefault();
     await dispatch(__editPost({ id, title, date, weather, contents }) as any);
     dispatch(__getPost() as any);
-    onClose();
   };
   return (
     <>
@@ -43,13 +43,21 @@ const ModalEditPost: React.FC<ModalPropsType> = ({ item, onClose }) => {
         <ModalWrap>
           <div className="modal">
             <form onSubmit={editSubmitHandler}>
-              <input value={title} onChange={setEditPostData} name="title" />
-              <input value={date} onChange={setEditPostData} name="date" />
-              <input value={weather} onChange={setEditPostData} name="weather" />
-              <input value={contents} onChange={setEditPostData} name="contents" />
-              <button>제출</button>
+              <input className="title" value={title} onChange={setEditPostData} name="title" />
+              <div className="info-box">
+                <input value={date} onChange={setEditPostData} name="date" />
+                <input value={weather} onChange={setEditPostData} name="weather" />
+              </div>
+              <div className="contents-box">
+                <textarea value={contents} onChange={setEditPostData} name="contents" />
+              </div>
+              <div className="btn-wrapper">
+                <Btn className="modal-submit-btn">제출</Btn>
+                <Btn className="modal-close-btn" onClick={onClose}>
+                  취소
+                </Btn>
+              </div>
             </form>
-            <button onClick={onClose}>취소</button>
           </div>
         </ModalWrap>
       </ModalPortal>

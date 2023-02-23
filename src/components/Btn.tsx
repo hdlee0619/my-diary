@@ -3,7 +3,7 @@ import React from 'react';
 interface btnType {
   children: string;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Btn = ({ className, children, onClick }: btnType) => {
