@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import ModalSignUp from '../components/modal/ModalSignUp';
 import useInput from '../hooks/useInput';
 import { useNavigate } from 'react-router-dom';
+import Btn from '../components/Btn';
 
 const Login = () => {
   const [openSignUpModal, setOpenSignUpModal] = useState(false);

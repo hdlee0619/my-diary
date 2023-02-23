@@ -1,17 +1,22 @@
+@use '../../helper/variable' as color;
+@use '../btn' as btn;
+
 .nav {
   display: flex;
   flex-direction: column;
   width: 20vw;
   height: 100vh;
   margin: 0.625rem;
-  border: 1px solid black;
+  border-radius: 0.625rem;
+  background-color: color.$nav-bg-color;
 
   & h1 {
+    margin: 0.625rem;
     font-size: 1.25rem;
     font-weight: bold;
   }
 
   & button {
-    margin: 0.5rem;
+    @include btn.nav-btn;
   }
 }

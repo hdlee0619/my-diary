@@ -1,0 +1,19 @@
+@use '../helper/variable' as color;
+
+@mixin nav-btn {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 1.0625rem;
+  color: color.$nav-btn-text-color;
+  background-color: color.$nav-btn-bg-color;
+}
+
+@mixin layout-btn {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 1.0625rem;
+  color: color.$nav-btn-bg-color;
+  background-color: color.$layout-bg-color;
+}
