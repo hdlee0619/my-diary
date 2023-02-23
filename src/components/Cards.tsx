@@ -25,10 +25,15 @@ const Cards: React.FC<CardsProps> = ({ item }) => {
   return (
     <>
       <div className="card">
-        <h1>{item.title}</h1>
+        <h2>{item.title}</h2>
         <div>
+          <span>Date : </span>
           <span>{item.date}</span>
+          <br />
+          <span>Weather : </span>
           <span>{item.weather}</span>
+          <br />
+          <span>ID : </span>
           <span>{item.author}</span>
         </div>
         <div>

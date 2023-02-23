@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-type Props = {
-  children: React.ReactElement;
+type LayoutType = {
+  children: JSX.Element | JSX.Element[];
 };
 
-const Layout: FC<Props> = ({ children }): JSX.Element => {
+const Layout = ({ children }: LayoutType) => {
   return <div className="layout">{children}</div>;
 };
 

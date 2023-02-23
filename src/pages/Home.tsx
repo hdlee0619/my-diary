@@ -15,10 +15,10 @@ const Home = (): JSX.Element => {
   const [cookies] = useCookies(['userToken']);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = cookies.userToken;
-    checkToken(token);
-  }, []);
+  // useEffect(() => {
+  //   const token = cookies.userToken;
+  //   checkToken(token);
+  // }, []);
 
   useEffect(() => {
     dispatch(__getPost());
@@ -52,6 +52,7 @@ const Home = (): JSX.Element => {
       <Navbar />
       <Layout>
         {/* 일단 any로 처리 */}
+        <h1>Diary List</h1>
         {post.map((item: any) => (
           <Cards key={item.id} item={item}></Cards>
         ))}
